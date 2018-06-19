@@ -16,6 +16,7 @@
 #include <alsa/control.h>
 
 #define TIMEFMT		"%a %d.%m.%y %H:%M"
+#define INTERFACE	"wlp58s0"
 
 char *BAT_0 = " ";  /* if [0%, 5%[ 	*/ 
 char *BAT_1 = " ";  /* if [5%, 25%[ 	*/ 
@@ -123,7 +124,7 @@ void get_ipaddr(void)
 
 	fd = socket(AF_INET, SOCK_DGRAM, 0);
 	ifr.ifr_addr.sa_family = AF_INET; /* IPv4 address */
-	strncpy(ifr.ifr_name, "wlp2s0", IFNAMSIZ-1);
+	strncpy(ifr.ifr_name, INTERFACE, IFNAMSIZ-1);
 
 	ioctl(fd, SIOCGIFADDR, &ifr);
 	strcpy(s, inet_ntoa(((struct sockaddr_in *)&ifr.ifr_addr)->sin_addr));
